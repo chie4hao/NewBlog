@@ -3,22 +3,25 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import CustomTable from './Table'
+import { fonts } from '../../styles/themes'
 
 // 自定义段落
 const Paragraph = styled.p`
   margin-bottom: 1.0rem;
   line-height: 1.8;
-  color: #000000;
-  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  color: ${props => props.theme.colors.text};
+  font-family: ${fonts.base};
   text-align: justify;
+  letter-spacing: 0.01em;
 `
 
 // 自定义标题
 const Heading = styled.h2`
   margin: 1.0rem 0 1.0rem;
-  color: #000000;
-  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  color: ${props => props.theme.colors.text};
+  font-family: ${fonts.heading};
   font-weight: 600;
+  letter-spacing: -0.02em;
   &:first-child {
     margin-top: 0;
   }
@@ -26,9 +29,9 @@ const Heading = styled.h2`
 
 // 自定义链接
 const StyledLink = styled(Link)`
-  color: #0066cc;
+  color: ${props => props.theme.colors.primary};
   text-decoration: none;
-  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  font-family: ${fonts.base};
   &:hover {
     text-decoration: underline;
   }
@@ -38,13 +41,14 @@ const StyledLink = styled(Link)`
 const Blockquote = styled.blockquote`
   margin: 1.0rem 0;
   padding: 0.5rem 1rem;
-  border-left: 4px solid #0066cc;
-  background: #f6f8fa;
-  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  border-left: 4px solid ${props => props.theme.colors.primary};
+  background: ${props => props.theme.colors.surface};
+  font-family: ${fonts.base};
+  font-style: italic;
   
   p {
     margin: 0;
-    color: #000000;
+    color: ${props => props.theme.colors.secondary};
   }
 `
 
@@ -52,8 +56,8 @@ const Blockquote = styled.blockquote`
 const List = styled.ul`
   margin: 1.0rem 0;
   padding-left: 1.5rem;
-  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-  color: #000000;
+  font-family: ${fonts.base};
+  color: ${props => props.theme.colors.text};
   
   li {
     margin-bottom: 0.5rem;
@@ -64,8 +68,8 @@ const List = styled.ul`
 const OrderedList = styled.ol`
   margin: 1.0rem 0;
   padding-left: 1.5rem;
-  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-  color: #000000;
+  font-family: ${fonts.base};
+  color: ${props => props.theme.colors.text};
   
   li {
     margin-bottom: 0.5rem;
@@ -79,7 +83,7 @@ const ImageStyles = styled.div`
   .gatsby-image-wrapper,
   img {
     border-radius: 8px !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    box-shadow: ${props => props.theme.shadows.medium} !important;
     transition: transform 0.2s ease-in-out !important;
     margin: 0 auto;
     
@@ -102,15 +106,15 @@ const ImageStyles = styled.div`
   figcaption,
   .gatsby-resp-image-figcaption {
     margin: 0.75rem auto 0;
-    color: #666;
+    color: ${props => props.theme.colors.secondary};
     font-size: 0.9em;
     font-style: italic;
     line-height: 1.6;
-    background: #f9fafb;
+    background: ${props => `${props.theme.colors.hover}80`};
     padding: 0.5rem 1rem;
     border-radius: 4px;
     display: inline-block;
-    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    font-family: ${fonts.base};
   }
 `
 

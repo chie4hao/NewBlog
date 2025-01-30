@@ -20,7 +20,7 @@ const Title = styled.h1`
 `
 
 const Meta = styled.div`
-  color: #666;
+  color: ${props => props.theme.colors.secondary};
   font-size: 0.9rem;
   margin-bottom: 1rem;
   display: flex;
@@ -30,27 +30,29 @@ const Meta = styled.div`
 
 const Content = styled.div`
   line-height: 1.8;
+  color: ${props => props.theme.colors.text};
   
   pre {
-    background: #f5f5f5;
+    background: ${props => props.theme.colors.surface};
     padding: 1rem;
     border-radius: 4px;
     overflow-x: auto;
     margin: 1.5rem 0;
+    box-shadow: ${props => props.theme.shadows.small};
   }
   
   code {
-    background: #f5f5f5;
+    background: ${props => props.theme.colors.surface};
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
     font-size: 0.9em;
   }
   
   blockquote {
-    border-left: 4px solid #ddd;
+    border-left: 4px solid ${props => props.theme.colors.border};
     padding-left: 1rem;
     margin-left: 0;
-    color: #666;
+    color: ${props => props.theme.colors.secondary};
   }
   
   p > code, li > code, a > code {
@@ -62,6 +64,15 @@ const Content = styled.div`
     padding: 0.2rem 0.4rem;
     display: block;
   }
+
+  a {
+    color: ${props => props.theme.colors.primary};
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
 
 const Tags = styled.div`
@@ -71,14 +82,16 @@ const Tags = styled.div`
 `
 
 const Tag = styled(TransitionLink)`
-  background: #f0f0f0;
+  background: ${props => props.theme.colors.surface};
   padding: 0.2rem 0.5rem;
   border-radius: 3px;
   font-size: 0.8rem;
-  color: #666;
+  color: ${props => props.theme.colors.secondary};
   text-decoration: none;
+  box-shadow: ${props => props.theme.shadows.small};
+  
   &:hover {
-    background: #e0e0e0;
+    background: ${props => props.theme.colors.hover};
   }
 `
 
@@ -87,7 +100,7 @@ const Navigation = styled.nav`
   justify-content: space-between;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid ${props => props.theme.colors.border};
   gap: 2rem;
 `
 
@@ -103,20 +116,21 @@ const NavItem = styled.div`
 const NavLabel = styled.span`
   display: block;
   font-size: 0.8rem;
-  color: #718096;
+  color: ${props => props.theme.colors.secondary};
   margin-bottom: 0.5rem;
 `
 
 const NavLink = styled(TransitionLink)`
-  color: #2d3748;
+  color: ${props => props.theme.colors.text};
   text-decoration: none;
   font-size: 1.0rem;
   position: relative;
   display: inline-block;
   max-width: 100%;
+  transition: color 0.3s ease;
   
   &:hover {
-    color: #663399;
+    color: ${props => props.theme.colors.primary};
   }
   
   // 文字溢出时显示省略号
@@ -153,12 +167,13 @@ const NavLink = styled(TransitionLink)`
 const BackToHome = styled(TransitionLink)`
   display: inline-block;
   margin-bottom: 2rem;
-  color: #666;
+  color: ${props => props.theme.colors.secondary};
   text-decoration: none;
   font-size: 0.9rem;
+  transition: color 0.3s ease;
   
   &:hover {
-    color: #663399;
+    color: ${props => props.theme.colors.primary};
   }
   
   &::before {

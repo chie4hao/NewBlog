@@ -9,8 +9,10 @@ import {
 const TableWrapper = styled.div`
   margin: 1.0rem 0;
   overflow-x: auto;
-  border: 1px solid #eaeaea;
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 8px;
+  background: ${props => props.theme.colors.surface};
+  box-shadow: ${props => props.theme.shadows.small};
 `
 
 const StyledTable = styled.table`
@@ -21,12 +23,12 @@ const StyledTable = styled.table`
 `
 
 const Th = styled.th`
-  background: #f9fafb;
+  background: ${props => props.theme.colors.hover};
   padding: 0.75rem 1rem;
   text-align: left;
   font-weight: 600;
-  color: #374151;
-  border-bottom: 1px solid #eaeaea;
+  color: ${props => props.theme.colors.text};
+  border-bottom: 1px solid ${props => props.theme.colors.border};
   white-space: nowrap;
   
   &:first-child {
@@ -40,13 +42,20 @@ const Th = styled.th`
 
 const Td = styled.td`
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #eaeaea;
-  color: #4b5563;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  color: ${props => props.theme.colors.text};
+  transition: background-color 0.2s ease;
 `
 
 const Tr = styled.tr`
+  transition: background-color 0.2s ease;
+
   &:hover {
-    background: #f9fafb;
+    background: ${props => props.theme.colors.hover};
+    
+    td {
+      color: ${props => props.theme.colors.primary};
+    }
   }
   
   &:last-child td {

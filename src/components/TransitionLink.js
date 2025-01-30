@@ -1,17 +1,19 @@
 import React from "react"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-import styled from "styled-components"
+import styled, { useTheme } from "styled-components"
 
 const StyledAniLink = styled(AniLink)`
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease;
   
   &:hover {
-    color: #663399;
+    color: ${props => props.theme.colors.primary};
   }
 `
 
 const TransitionLink = ({ to, children, rel, ...props }) => {
+  const theme = useTheme()
   const isBack = to === "/" // 返回首页
   const isPrev = rel === "prev" // 上一篇文章
   
@@ -27,7 +29,7 @@ const TransitionLink = ({ to, children, rel, ...props }) => {
       cover
       direction={getDirection()}
       duration={0.8}
-      bg="#663399"
+      bg={theme.colors.primary}
       to={to}
       entry={{
         delay: 0.2,

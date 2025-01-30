@@ -9,15 +9,17 @@ const Nav = styled.nav`
 `
 
 const NavLink = styled(TransitionLink)`
-  color: #2d3748;
+  color: ${props => props.theme.colors.text};
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
   padding: 0.5rem;
   position: relative;
+  transition: color 0.3s ease;
   
   &:hover {
-    color: #663399;
+    color: ${props => props.theme.colors.primary};
+    text-decoration: none;
   }
   
   &::after {
@@ -27,7 +29,7 @@ const NavLink = styled(TransitionLink)`
     height: 2px;
     bottom: 0;
     left: 50%;
-    background-color: #663399;
+    background-color: ${props => props.theme.colors.primary};
     transition: all 0.3s ease;
   }
   
@@ -37,7 +39,7 @@ const NavLink = styled(TransitionLink)`
   }
   
   &.active {
-    color: #663399;
+    color: ${props => props.theme.colors.primary};
     
     &::after {
       width: 100%;

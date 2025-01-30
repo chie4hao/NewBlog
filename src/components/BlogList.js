@@ -7,13 +7,13 @@ const BlogCard = styled.article`
   margin-bottom: 2rem;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: ${props => props.theme.shadows.medium};
   transition: all 0.3s ease;
-  background: white;
+  background: ${props => props.theme.colors.surface};
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: ${props => props.theme.shadows.large};
   }
 `
 
@@ -23,14 +23,23 @@ const CardContent = styled.div`
   gap: 1.5rem;
 `
 
+const StyledLink = styled(TransitionLink)`
+  text-decoration: none;
+  display: block;
+  
+  &:hover {
+    text-decoration: none;
+  }
+`
+
 const ImageWrapper = styled.div`
   flex-shrink: 0;
   width: 100px;
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #f8f8f8;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid ${props => props.theme.colors.border};
+  box-shadow: ${props => props.theme.shadows.small};
   
   .gatsby-image-wrapper {
     width: 100%;
@@ -46,17 +55,18 @@ const TextContent = styled.div`
 const BlogTitle = styled.h2`
   margin: 0 0 0.5rem;
   font-size: 1.4rem;
-  color: #2d3748;
+  color: ${props => props.theme.colors.text};
   line-height: 1.4;
+  transition: color 0.3s ease;
   
-  &:hover {
-    color: #663399;
+  ${StyledLink}:hover & {
+    color: ${props => props.theme.colors.primary};
   }
 `
 
 const BlogMeta = styled.div`
   font-size: 0.9rem;
-  color: #718096;
+  color: ${props => props.theme.colors.secondary};
   margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
@@ -64,7 +74,7 @@ const BlogMeta = styled.div`
 `
 
 const BlogExcerpt = styled.p`
-  color: #4a5568;
+  color: ${props => props.theme.colors.secondary};
   line-height: 1.6;
   margin: 0;
   overflow: hidden;
@@ -85,7 +95,7 @@ const BlogList = ({ posts }) => {
 
         return (
           <BlogCard key={node.fields.slug}>
-            <TransitionLink to={node.fields.slug}>
+            <StyledLink to={node.fields.slug}>
               <CardContent>
                 {coverImage && (
                   <ImageWrapper>
@@ -107,7 +117,7 @@ const BlogList = ({ posts }) => {
                   <BlogExcerpt>{node.excerpt}</BlogExcerpt>
                 </TextContent>
               </CardContent>
-            </TransitionLink>
+            </StyledLink>
           </BlogCard>
         )
       })}

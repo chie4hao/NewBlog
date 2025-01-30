@@ -2,19 +2,12 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import BlogList from "../components/BlogList"
-import styled from "styled-components"
-
-const Title = styled.h1`
-  margin-bottom: 2rem;
-  color: #333;
-`
 
 const IndexPage = ({ data }) => {
   const posts = data.allMdx.edges
 
   return (
     <Layout>
-      <Title>最新文章</Title>
       <BlogList posts={posts} />
     </Layout>
   )

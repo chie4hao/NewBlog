@@ -15,6 +15,7 @@ module.exports = {
     },
   },
   plugins: [
+    "gatsby-plugin-react-helmet",
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
@@ -43,7 +44,6 @@ module.exports = {
                 text-align: center;
               `,
               backgroundColor: 'transparent',
-              className: 'gatsby-remark-image-wrapper',
             },
           },
           {
