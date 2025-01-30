@@ -54,6 +54,32 @@ const Footer = styled.footer`
 `
 
 const Layout = ({ children }) => {
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  // 在服务器端渲染和客户端首次渲染时返回基础布局
+  if (!isMounted) {
+    return (
+      <Container>
+        <Header>
+          <HeaderContent>
+            <SiteTitle to="/">我的博客</SiteTitle>
+          </HeaderContent>
+        </Header>
+        <main>{children}</main>
+        <Footer>
+          © {new Date().getFullYear()}, 使用
+          {` `}
+          <a href="https://www.gatsbyjs.com">Gatsby</a> 构建
+        </Footer>
+      </Container>
+    )
+  }
+
+  // 客户端渲染完成后返回完整布局
   return (
     <Container>
       <Header>
