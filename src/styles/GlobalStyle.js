@@ -2,15 +2,31 @@ import { createGlobalStyle } from 'styled-components'
 import { fonts } from './themes'
 
 const GlobalStyle = createGlobalStyle`
+  html {
+    min-height: 100%;
+  }
+
   body {
     margin: 0;
     padding: 0;
-    background: ${props => props.theme.colors.background};
+    min-height: 100vh;
+    background: ${props => {
+      const theme = props.theme.name;
+      const bgImage = theme === '浅色' ? '/themes/light-pattern.avif'
+        : theme === '深色' ? '/themes/dark-starry.avif'
+        : theme === '春季' ? '/themes/spring-cherry.avif'
+        : theme === '夏季' ? '/themes/summer-tropical.avif'
+        : theme === '秋季' ? '/themes/autumn-leaves.avif'
+        : '/themes/winter-snow.avif';
+      return `${props.theme.colors.background},
+              url(${bgImage}) center/cover fixed no-repeat`;
+    }};
+    background-attachment: fixed;
     color: ${props => props.theme.colors.text};
     font-family: ${fonts.base};
     font-size: 16px;
     line-height: 1.8;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

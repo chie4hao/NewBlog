@@ -2,7 +2,7 @@ export const themes = {
   light: {
     name: '浅色',
     colors: {
-      background: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)',
+      background: 'linear-gradient(120deg, rgba(253, 251, 251, 0.45), rgba(235, 237, 238, 0.45))',
       text: '#2d3748',
       primary: '#663399',
       secondary: '#718096',
@@ -20,7 +20,7 @@ export const themes = {
   dark: {
     name: '深色',
     colors: {
-      background: 'linear-gradient(120deg, #2d3748 0%, #1a202c 100%)',
+      background: 'linear-gradient(120deg, rgba(45, 55, 72, 0.45), rgba(26, 32, 44, 0.45))',
       text: '#f7fafc',
       primary: '#9f7aea',
       secondary: '#a0aec0',
@@ -38,7 +38,7 @@ export const themes = {
   spring: {
     name: '春季',
     colors: {
-      background: 'linear-gradient(120deg, #e6fffa 0%, #f0fff4 100%)',
+      background: 'linear-gradient(120deg, rgba(230, 255, 250, 0.45), rgba(240, 255, 244, 0.45))',
       text: '#2d3748',
       primary: '#38b2ac',
       secondary: '#718096',
@@ -56,7 +56,7 @@ export const themes = {
   summer: {
     name: '夏季',
     colors: {
-      background: 'linear-gradient(120deg, #fff5f5 0%, #fffaf0 100%)',
+      background: 'linear-gradient(120deg, rgba(255, 245, 245, 0.45), rgba(255, 250, 240, 0.45))',
       text: '#2d3748',
       primary: '#ed8936',
       secondary: '#718096',
@@ -74,7 +74,7 @@ export const themes = {
   autumn: {
     name: '秋季',
     colors: {
-      background: 'linear-gradient(120deg, #fffaf0 0%, #fff5f5 100%)',
+      background: 'linear-gradient(120deg, rgba(255, 250, 240, 0.45), rgba(255, 245, 245, 0.45))',
       text: '#2d3748',
       primary: '#dd6b20',
       secondary: '#718096',
@@ -92,7 +92,7 @@ export const themes = {
   winter: {
     name: '冬季',
     colors: {
-      background: 'linear-gradient(120deg, #f7fafc 0%, #ebf8ff 100%)',
+      background: 'linear-gradient(120deg, rgba(247, 250, 252, 0.45), rgba(235, 248, 255, 0.45))',
       text: '#2d3748',
       primary: '#3182ce',
       secondary: '#718096',

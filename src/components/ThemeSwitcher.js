@@ -11,10 +11,22 @@ const SwitcherContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  background: ${props => props.theme.colors.surface};
+  background: ${props => `${props.theme.colors.surface}88`};
+  backdrop-filter: blur(8px);
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: ${props => props.theme.shadows.large};
+  border: 1px solid ${props => `${props.theme.colors.border}44`};
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${props => `${props.theme.colors.surface}aa`};
+  }
+
+  @media (max-width: 768px) {
+    bottom: 1rem;
+    right: 1rem;
+  }
 `
 
 const buttonStyles = css`
