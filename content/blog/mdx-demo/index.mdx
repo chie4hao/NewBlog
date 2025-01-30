@@ -1,0 +1,126 @@
+---
+title: MDX 功能展示
+date: "2024-03-19"
+updateDate: "2024-03-19"
+cover: cover.jpeg
+description: 这篇文章展示了 MDX 支持的各种功能和用法
+tags: ["MDX", "Gatsby", "教程"]
+---
+
+# MDX 功能展示
+
+这篇文章将展示 MDX 支持的各种功能和用法。MDX 允许我们在 Markdown 中使用 React 组件，这让文章写作变得更加灵活和强大。
+
+## 基础 Markdown 语法
+
+### 文本格式化
+
+你可以使用 **粗体**、*斜体* 或 ***粗斜体*** 来强调文本。
+
+### 列表
+
+无序列表：
+
+- 第一项
+- 第二项
+  - 子项 1
+  - 子项 2
+- 第三项
+
+有序列表：
+
+1. 第一步
+2. 第二步
+3. 第三步
+
+### 引用
+
+> 这是一段引用文本。
+> 
+> 引用可以包含多个段落。
+
+### 代码
+
+行内代码：`console.log('Hello, World!')`
+
+代码块：
+
+```javascript
+// 这是一个 JavaScript 函数
+function greeting(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greeting('MDX'));
+```
+
+### 表格
+
+## 表格展示
+
+### 基础表格
+export const tableData = [
+  {
+    功能: 'Markdown',
+    支持情况: '✅',
+    备注: '基础语法',
+  },
+  {
+    功能: 'MDX',
+    支持情况: '✅',
+    备注: 'React 组件支持',
+  },
+  {
+    功能: '图片',
+    支持情况: '✅',
+    备注: '本地图片优化',
+  },
+]
+
+<CustomTable data={tableData} />
+
+## 图片支持
+
+### 本地图片
+
+下面是一张本地图片（需要在同一目录下放置 example.jpg）：
+
+![示例图片](./example.jpg)
+
+### 外部图片
+
+也支持外部图片链接：
+
+![Gatsby Logo](https://www.gatsbyjs.com/Gatsby-Monogram.svg)
+
+## React 组件
+
+MDX 的强大之处在于可以直接在 Markdown 中使用 React 组件。
+
+import { Link } from 'gatsby'
+
+<Link to="/">返回首页</Link>
+
+---
+
+## 其他功能
+
+### 水平分割线
+
+上面就是一条水平分割线。
+
+### 脚注
+
+这里是一个脚注的例子[^1]。
+
+[^1]: 这是脚注的内容。
+
+### 任务列表
+
+- [x] 完成 MDX 支持
+- [x] 添加示例文章
+- [ ] 部署到生产环境
+
+## 结语
+
+通过这篇文章，我们展示了 MDX 支持的主要功能。你可以根据需要组合使用这些功能，创作出丰富多样的博客文章。
