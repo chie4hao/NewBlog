@@ -1,6 +1,7 @@
 import React from "react"
-import { Link } from "gatsby"
 import styled from "styled-components"
+import Navigation from "./Navigation"
+import TransitionLink from "./TransitionLink"
 
 const Container = styled.div`
   margin: 0 auto;
@@ -11,20 +12,28 @@ const Container = styled.div`
 const Header = styled.header`
   margin-bottom: 2rem;
   border-bottom: 1px solid #eee;
-`
-
-const Nav = styled.nav`
-  display: flex;
-  gap: 1rem;
   padding: 1rem 0;
 `
 
-const StyledLink = styled(Link)`
-  color: #333;
+const SiteTitle = styled(TransitionLink)`
+  color: #2d3748;
   text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: inline-block;
+  
   &:hover {
-    color: #666;
+    color: #663399;
   }
+`
+
+const HeaderContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 `
 
 const Footer = styled.footer`
@@ -32,21 +41,26 @@ const Footer = styled.footer`
   padding: 1rem 0;
   border-top: 1px solid #eee;
   text-align: center;
-  color: #666;
+  color: #718096;
+  
+  a {
+    color: #663399;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
 
 const Layout = ({ children }) => {
   return (
     <Container>
       <Header>
-        <h1>
-          <StyledLink to="/">我的博客</StyledLink>
-        </h1>
-        <Nav>
-          <StyledLink to="/">首页</StyledLink>
-          <StyledLink to="/tags">标签</StyledLink>
-          <StyledLink to="/about">关于</StyledLink>
-        </Nav>
+        <HeaderContent>
+          <SiteTitle to="/">我的博客</SiteTitle>
+          <Navigation />
+        </HeaderContent>
       </Header>
       <main>{children}</main>
       <Footer>
