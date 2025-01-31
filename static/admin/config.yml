@@ -1,23 +1,67 @@
+# 后端配置
 backend:
-  name: git-gateway
-  branch: main
+  name: git-gateway    # 使用 Netlify 的身份验证服务
+  branch: main        # 要更新的 Git 分支
+  commit_messages:    # 自定义提交信息
+    create: '创建: {{collection}} "{{slug}}"'
+    update: '更新: {{collection}} "{{slug}}"'
+    delete: '删除: {{collection}} "{{slug}}"'
+    uploadMedia: '上传: [媒体] {{path}}'
+    deleteMedia: '删除: [媒体] {{path}}'
+  auth_scope: repo    # Git 访问范围
 
-media_folder: static/img
-public_folder: /img
+# 本地开发配置
+local_backend: true   # 开发时使用本地后端
 
+# 媒体文件配置
+media_folder: "static/img"     # 上传文件保存位置
+public_folder: "/img"          # 文件的公共访问路径
+
+# 编辑器配置
+editor:
+  preview: true    # 开启实时预览
+
+publish_mode: editorial_workflow  # 启用编辑工作流程
+
+# 内容集合定义
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "content/blog"
+  - name: "blog"    # 集合的唯一标识
+    label: "博客"   # 在管理界面显示的名称
+    folder: "content/blog"    # 文章存储的文件夹
+    create: true    # 允许创建新文章
+    path: "{{slug}}/index"    # 文件路径格式
+    media_folder: ""    # 当前集合的媒体文件夹
+    public_folder: ""   # 当前集合的公共访问路径
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"    # 文件名格式
+    fields:          # 定义文章的字段
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "更新日期", name: "updateDate", widget: "datetime", format: "YYYY-MM-DD", required: false}
+      - {label: "描述", name: "description", widget: "text"}
+      - {label: "标签", name: "tags", widget: "list"}
+      - {
+          label: "封面图",
+          name: "cover",
+          widget: "image",
+          required: false,
+          media_folder: "/",
+          public_folder: "/",
+          hint: "建议尺寸 1200x630"
+        }
+      - {label: "内容", name: "body", widget: "markdown"}
+
+  - name: "pages"    # 页面集合
+    label: "页面"
+    folder: "content/pages"
     create: true
-    path: "{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Tags", name: "tags", widget: "list"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "内容", name: "body", widget: "markdown"}
+
+# 自定义预览样式
+show_preview_links: true
+site_url: https://chie4.com
+display_url: https://chie4.com
+
+# i18n 配置
+locale: 'zh_CN'    # 使用中文界面

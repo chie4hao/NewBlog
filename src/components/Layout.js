@@ -4,6 +4,7 @@ import TransitionLink from "./TransitionLink"
 import ThemeSwitcher from "./ThemeSwitcher"
 import GlobalStyle from "../styles/GlobalStyle"
 import Sidebar from "./Sidebar"
+import { Helmet } from "react-helmet"
 
 const PageWrapper = styled.div`
   display: flex;
@@ -115,6 +116,9 @@ const Layout = ({ children }) => {
   if (!isMounted) {
     return (
       <>
+        <Helmet>
+          <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+        </Helmet>
         <GlobalStyle />
         <PageWrapper>
           <Container>
@@ -138,6 +142,9 @@ const Layout = ({ children }) => {
   // 客户端渲染完成后返回完整布局
   return (
     <>
+      <Helmet>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+      </Helmet>
       <GlobalStyle />
       <PageWrapper>
         <Sidebar isOpen={sidebarOpen} onClose={setSidebarOpen} />

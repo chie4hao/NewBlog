@@ -92,6 +92,82 @@ module.exports = {
       },
       __key: "pages"
     },
-    "gatsby-plugin-transition-link"
+    "gatsby-plugin-transition-link",
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+          {
+            allMdx {
+              nodes {
+                fields {
+                  slug
+                }
+                frontmatter {
+                  updateDate
+                  date
+                }
+              }
+            }
+          }
+        `,
+        resolveSiteUrl: () => 'https://chie4.com',
+        resolvePages: ({
+          allMdx: { nodes: allMdx },
+        }) => {
+          return allMdx.map(post => {
+            return {
+              path: post.fields.slug,
+              lastmod: post.frontmatter.updateDate || post.frontmatter.date,
+              changefreq: 'daily',
+              priority: 0.7,
+            }
+          })
+        },
+        serialize: ({ path, lastmod, changefreq, priority }) => {
+          return {
+            url: path,
+            lastmod,
+            changefreq,
+            priority,
+          }
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://chie4.com',
+        sitemap: 'https://chie4.com/sitemap-index.xml',
+        policy: [
+          {
+            userAgent: '*',
+            allow: '/',
+            disallow: [
+              '/admin',
+              '/admin/*',  // 禁止所有管理后台页面
+              '/private',
+              '/draft',
+              '/preview',
+              '*/admin',   // 禁止任何包含 admin 的路径
+              '*/private',
+              '*/draft',
+              '*/preview',
+              '*.json',    // 禁止访问 JSON 文件
+              '*.yml',     // 禁止访问 YML 配置文件
+            ],
+          },
+          {
+            userAgent: 'Baiduspider',
+            allow: '/',
+            crawlDelay: 1,
+          },
+          {
+            userAgent: 'Googlebot',
+            allow: '/',
+          },
+        ],
+      }
+    },
   ]
 };
