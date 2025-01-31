@@ -9,11 +9,15 @@ const BlogCard = styled.article`
   border-radius: 12px;
   box-shadow: ${props => props.theme.shadows.medium};
   transition: all 0.3s ease;
-  background: ${props => props.theme.colors.surface};
+  background: ${props => `${props.theme.colors.surface}20`};
+  backdrop-filter: blur(8px);
+  border: 1px solid ${props => `${props.theme.colors.border}22`};
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: ${props => props.theme.shadows.large};
+    background: ${props => `${props.theme.colors.surface}aa`};
+    backdrop-filter: blur(12px);
   }
 `
 
@@ -38,7 +42,7 @@ const ImageWrapper = styled.div`
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid ${props => props.theme.colors.border};
+  border: 3px solid ${props => `${props.theme.colors.border}44`};
   box-shadow: ${props => props.theme.shadows.small};
   
   .gatsby-image-wrapper {
@@ -66,7 +70,7 @@ const BlogTitle = styled.h2`
 
 const BlogMeta = styled.div`
   font-size: 0.9rem;
-  color: ${props => props.theme.colors.secondary};
+  color: ${props => `${props.theme.colors.secondary}dd`};
   margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
@@ -74,7 +78,7 @@ const BlogMeta = styled.div`
 `
 
 const BlogExcerpt = styled.p`
-  color: ${props => props.theme.colors.secondary};
+  color: ${props => `${props.theme.colors.secondary}dd`};
   line-height: 1.6;
   margin: 0;
   overflow: hidden;
@@ -125,4 +129,4 @@ const BlogList = ({ posts }) => {
   )
 }
 
-export default BlogList 
+export default BlogList
