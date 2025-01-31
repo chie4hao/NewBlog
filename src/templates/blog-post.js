@@ -5,6 +5,7 @@ import Layout from "../components/Layout"
 import styled from "styled-components"
 import MDXComponents from "../components/mdx"
 import TransitionLink from "../components/TransitionLink"
+import SeoHead from "../components/SeoHead"
 
 const Article = styled.article`
   max-width: 700px;
@@ -253,6 +254,24 @@ const BlogPostTemplate = ({ data, children, pageContext }) => {
   )
 }
 
+export const Head = ({ data }) => {
+  const post = data.mdx
+  const coverImage = post.frontmatter.cover?.childImageSharp?.gatsbyImageData?.images?.fallback?.src
+
+  return (
+    <SeoHead
+      title={post.frontmatter.title}
+      description={post.frontmatter.description || post.excerpt}
+      pathname={post.fields.slug}
+      article={true}
+      image={coverImage}
+      tags={post.frontmatter.tags}
+      date={post.frontmatter.date}
+      updateDate={post.frontmatter.updateDate}
+    />
+  )
+}
+
 export const pageQuery = graphql`
   query BlogPostBySlug(
     $id: String!
@@ -261,15 +280,31 @@ export const pageQuery = graphql`
   ) {
     mdx(id: { eq: $id }) {
       id
+      excerpt(pruneLength: 160)
       fields {
         slug
       }
       frontmatter {
         title
-        date(formatString: "YYYY年MM月DD日")
-        updateDate(formatString: "YYYY年MM月DD日")
+        date(formatString: "YYYY-MM-DD")
+        updateDate(formatString: "YYYY-MM-DD")
         description
         tags
+        cover {
+          childImageSharp {
+            gatsbyImageData(
+              width: 1200
+              height: 630
+              transformOptions: {
+                cropFocus: CENTER
+                fit: COVER
+              }
+              quality: 90
+              formats: [AUTO, WEBP]
+              placeholder: BLURRED
+            )
+          }
+        }
       }
     }
     previous: mdx(id: { eq: $previousPostId }) {
@@ -291,8 +326,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default BlogPostTemplate
-
-export const Head = ({ data }) => (
-  <title>{data.mdx.frontmatter.title}</title>
-) 
+export default BlogPostTemplate 

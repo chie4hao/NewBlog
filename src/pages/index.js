@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import BlogList from "../components/BlogList"
+import SeoHead from "../components/SeoHead"
 
 const IndexPage = ({ data }) => {
   const posts = data.allMdx.edges
@@ -51,4 +52,10 @@ export const pageQuery = graphql`
 
 export default IndexPage
 
-export const Head = () => <title>首页</title>
+export const Head = () => (
+  <SeoHead
+    title="chie4的博客"
+    description="欢迎来到我的博客，这里记录了我在技术、音乐、键盘等领域的探索和思考。"
+    pathname="/"
+  />
+)

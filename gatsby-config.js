@@ -3,15 +3,15 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `我的博客`,
+    title: `chie4的博客`,
     author: {
-      name: `博主`,
+      name: `chie4`,
       summary: `分享技术与生活`,
     },
     description: `使用 Gatsby 构建的个人博客`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://www.chie4.com`,
     social: {
-      twitter: `yourtwitter`,
+      twitter: `@chie4hao`,
     },
   },
   plugins: [

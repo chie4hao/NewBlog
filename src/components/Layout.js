@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import TransitionLink from "./TransitionLink"
 import ThemeSwitcher from "./ThemeSwitcher"
-import SeoHead from "./SeoHead"
 import GlobalStyle from "../styles/GlobalStyle"
 import Sidebar from "./Sidebar"
 
@@ -93,7 +92,7 @@ const Footer = styled.footer`
   }
 `
 
-const Layout = ({ children, title, description }) => {
+const Layout = ({ children }) => {
   const [isMounted, setIsMounted] = React.useState(false)
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
 
@@ -119,10 +118,9 @@ const Layout = ({ children, title, description }) => {
         <GlobalStyle />
         <PageWrapper>
           <Container>
-            <SeoHead title={title || "我的博客"} description={description} />
             <Header>
               <HeaderContent>
-                <SiteTitle to="/">我的博客</SiteTitle>
+                <SiteTitle to="/">chie4的博客</SiteTitle>
               </HeaderContent>
             </Header>
             <Main>{children}</Main>
@@ -144,10 +142,9 @@ const Layout = ({ children, title, description }) => {
       <PageWrapper>
         <Sidebar isOpen={sidebarOpen} onClose={setSidebarOpen} />
         <Container $sidebarOpen={sidebarOpen}>
-          <SeoHead title={title || "我的博客"} description={description} />
           <Header>
             <HeaderContent>
-              <SiteTitle to="/">我的博客</SiteTitle>
+              <SiteTitle to="/">chie4的博客</SiteTitle>
             </HeaderContent>
           </Header>
           <Main>{children}</Main>
