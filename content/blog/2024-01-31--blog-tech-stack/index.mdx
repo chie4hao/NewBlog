@@ -1,0 +1,183 @@
+---
+title: 博客技术栈升级与重构记录
+author: chie4
+date: "2025-01-31"
+updateDate: "2025-01-31"
+description: "记录博客从技术选型到实现的完整过程，深入分析Gatsby、React、styled-components、MDX等技术的实践经验"
+tags: ["Gatsby", "React", "博客开发", "前端工程化"]
+cover: "./cover.jpeg"
+---
+
+
+## 技术栈概览
+
+算是第三次开发博客了，本次博客采用了以下技术栈：
+
+- **核心框架**: Gatsby 5.x + React 18
+- **样式解决方案**: styled-components
+- **内容管理**: MDX（Markdown + JSX）
+- **部署架构**: Github + Netlify + Cloudflare
+- **内容管理系统**: Netlify CMS
+
+## 技术选型分析
+
+在技术选型阶段，对主流的静态站点生成方案进行了深入对比：
+
+1. **构建性能**:
+   - Gatsby: 增量构建，热重载支持
+   - Next.js: 完整SSR支持，构建较慢
+   - Hugo: 构建速度最快，但生态较弱
+
+2. **开发体验**:
+   - React组件化开发
+   - GraphQL数据层抽象
+   - 插件系统的可扩展性
+
+3. **性能优化**:
+   - 静态页面生成(SSG)
+   - 智能代码分割
+   - 图片自动优化
+
+## 核心架构设计
+
+### 项目结构
+
+采用了功能模块化的目录结构设计：
+
+```
+├── content/          # 内容管理
+│   └── blog/         # MDX文章
+├── src/
+│   ├── components/   # 可复用组件
+│   ├── pages/        # 路由页面
+│   ├── templates/    # 页面模板
+│   └── styles/       # 主题配置
+├── static/           # 静态资源
+└── gatsby-*.js       # 构建配置
+```
+
+### 样式系统实现
+
+基于styled-components实现了主题化的样式系统：
+
+```typescript
+interface ThemeInterface {
+  colors: {
+    surface: string;
+    text: string;
+    primary: string;
+    secondary: string;
+  };
+  shadows: {
+    small: string;
+    medium: string;
+    large: string;
+  };
+}
+
+const BlogCard = styled.article<{ $theme: ThemeInterface }>`
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: ${({ theme }) => `${theme.colors.surface}20`};
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, background 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    background: ${({ theme }) => `${theme.colors.surface}aa`};
+  }
+`
+```
+
+### MDX增强
+
+MDX的引入不仅支持Markdown语法，还实现了自定义组件的注入能力：
+
+```tsx
+// components/mdx/CodeDemo.tsx
+interface CodeDemoProps {
+  children: React.ReactNode;
+  language?: string;
+}
+
+export const CodeDemo: React.FC<CodeDemoProps> = ({ 
+  children,
+  language = 'javascript'
+}) => {
+  return (
+    <div className="code-demo">
+      <pre>
+        <code className={`language-${language}`}>
+          {children}
+        </code>
+      </pre>
+    </div>
+  );
+};
+```
+
+## 性能优化实践
+
+### 1. 资源加载优化
+
+- 实现图片懒加载和响应式处理
+- 关键CSS内联
+- 组件级代码分割
+
+### 2. 构建优化
+
+- 静态资源压缩
+- Tree Shaking
+- 模块预编译
+
+## 部署架构
+
+采用了现代化的部署方案：
+
+1. **源码管理**: GitHub
+2. **自动化部署**: Netlify
+3. **CDN加速**: Cloudflare
+4. **域名管理**: GoDaddy
+
+实现了完整的CI/CD流程：
+
+```yaml
+# netlify.toml
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NODE_ENV = "production"
+
+[[plugins]]
+  package = "@netlify/plugin-gatsby"
+```
+
+## 待优化项目
+
+1. **性能监控**
+   - Lighthouse CI集成
+   - 性能指标采集
+
+2. **功能增强**
+   - 全文检索
+   - 评论系统
+   - 访问统计
+
+3. **工程化提升**
+   - TypeScript重构
+   - 单元测试覆盖
+   - E2E测试
+
+## 写在最后
+
+时光飞逝，博客沉寂了近5年。这期间，前端技术栈发生了翻天覆地的变化：React Hooks的普及、构建工具的革新、浏览器API的进化...作为一名开发者，与其感叹技术迭代之快，不如动手实践，将新技术融入到实际项目中。
+
+这次博客开发，不仅是技术栈的更新，更是对现代前端工程化实践的一次探索。从最初的简单个人网站，到现在的完整技术栈，每一次重构都是一次成长。
+
+五年的技术积累，终于有了重新整理和分享的契机。希望这篇技术总结，能为同样热爱技术的你带来一些启发。
+
+未来，这里将继续记录技术探索的点滴，也欢迎各位一起交流讨论。
