@@ -66,7 +66,12 @@ const SeoHead = ({
       '@type': 'Person',
       name: author.name,
       description: author.summary,
-      url: siteUrl
+      url: siteUrl,
+      image: `${siteUrl}/avatar.jpg`,  // 作者头像
+      sameAs: [
+        `https://twitter.com/${social.twitter}`,
+        // 可以添加其他社交媒体链接
+      ]
     },
     publisher: {
       '@type': 'Organization',
@@ -90,11 +95,58 @@ const SeoHead = ({
       keywords: tags?.join(', '),
       articleSection: tags?.[0],
       wordCount: description?.length || 0,
+      timeRequired: `PT${Math.ceil(description?.length / 200)}M`, // 预估阅读时间
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': seo.url
-      }
+      },
+      // 添加面包屑导航
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            item: {
+              '@id': siteUrl,
+              name: defaultTitle
+            }
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            item: {
+              '@id': seo.url,
+              name: title
+            }
+          }
+        ]
+      },
+      // 如果是技术文章，可以添加代码片段标记
+      ...(tags?.includes('代码') && {
+        articleBody: description,
+        programmingLanguage: tags.find(tag => 
+          ['JavaScript', 'Python', 'Java', 'C++'].includes(tag)
+        )
+      })
     })
+  }
+
+  // 如果是首页，添加网站搜索功能标记
+  const websiteSchema = !article ? {
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteUrl}/search?q={search_term_string}`
+      },
+      'query-input': 'required name=search_term_string'
+    }
+  } : {}
+
+  const finalSchema = {
+    ...schemaOrgJSONLD,
+    ...websiteSchema
   }
 
   return (
@@ -153,7 +205,7 @@ const SeoHead = ({
 
       {/* Schema.org JSON-LD */}
       <script type="application/ld+json">
-        {JSON.stringify(schemaOrgJSONLD)}
+        {JSON.stringify(finalSchema)}
       </script>
 
       {/* Google Fonts */}
