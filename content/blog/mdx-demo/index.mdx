@@ -15,7 +15,7 @@ tags: ["MDX", "Gatsby", "教程"]
 
 ### 文本格式化
 
-你可以使用 **粗体**、*斜体* 或 ***粗斜体*** 来强调文本。
+你可以使用 **粗体**、_斜体_ 或 **_粗斜体_** 来强调文本。
 
 ### 列表
 
@@ -36,7 +36,7 @@ tags: ["MDX", "Gatsby", "教程"]
 ### 引用
 
 > 这是一段引用文本。
-> 
+>
 > 引用可以包含多个段落。
 
 ### 代码
@@ -51,7 +51,7 @@ function greeting(name) {
   return `Hello, ${name}!`;
 }
 
-console.log(greeting('MDX'));
+console.log(greeting("MDX"));
 ```
 
 ### 表格
@@ -59,23 +59,24 @@ console.log(greeting('MDX'));
 ## 表格展示
 
 ### 基础表格
+
 export const tableData = [
   {
-    功能: 'Markdown',
-    支持情况: '✅',
-    备注: '基础语法',
+    功能: "Markdown",
+    支持情况: "✅",
+    备注: "基础语法",
   },
   {
-    功能: 'MDX',
-    支持情况: '✅',
-    备注: 'React 组件支持',
+    功能: "MDX",
+    支持情况: "✅",
+    备注: "React 组件支持",
   },
   {
-    功能: '图片',
-    支持情况: '✅',
-    备注: '本地图片优化',
+    功能: "图片",
+    支持情况: "✅",
+    备注: "本地图片优化",
   },
-]
+];
 
 <CustomTable data={tableData} />
 
@@ -97,7 +98,7 @@ export const tableData = [
 
 MDX 的强大之处在于可以直接在 Markdown 中使用 React 组件。
 
-import { Link } from 'gatsby'
+import { Link } from "gatsby";
 
 <Link to="/">返回首页</Link>
 
