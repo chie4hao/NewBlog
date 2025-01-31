@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import TransitionLink from './TransitionLink'
+import ThemeSwitcher from './ThemeSwitcher'
 
 const SidebarContainer = styled.div`
   position: fixed;
   left: 0;
   top: 0;
   height: 100vh;
-  width: 250px;
+  width: 200px;
   background: transparent;
   border-right: 1px solid ${props => props.theme.colors.border};
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
@@ -15,10 +16,10 @@ const SidebarContainer = styled.div`
   transform: translateX(${props => (props.$isOpen ? '0' : '-100%')});
   transition: all 0.3s ease-in-out;
   z-index: 1000;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 
   &::before {
     content: '';
@@ -44,14 +45,15 @@ const SidebarContent = styled.div`
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  flex: 1;
 `
 
 const NavLink = styled(TransitionLink)`
   color: ${props => props.theme.colors.text};
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
-  padding: 0.8rem 1rem;
+  padding: 0.6rem 0.8rem;
   position: relative;
   transition: all 0.3s ease;
   border-radius: 8px;
@@ -90,6 +92,12 @@ const NavLink = styled(TransitionLink)`
       bottom: 15%;
     }
   }
+`
+
+const ThemeSwitcherWrapper = styled.div`
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid ${props => props.theme.colors.border}44;
 `
 
 const MenuButton = styled.button`
@@ -157,6 +165,9 @@ const Sidebar = ({ isOpen, onClose }) => {
           <NavLink to="/">首页</NavLink>
           <NavLink to="/tags">标签</NavLink>
           <NavLink to="/about">关于</NavLink>
+          <ThemeSwitcherWrapper>
+            <ThemeSwitcher />
+          </ThemeSwitcherWrapper>
         </SidebarContent>
       </SidebarContainer>
       <Overlay $isOpen={isOpen} onClick={() => onClose(false)} />

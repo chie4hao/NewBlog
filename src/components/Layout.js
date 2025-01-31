@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import TransitionLink from "./TransitionLink"
-import ThemeSwitcher from "./ThemeSwitcher"
 import GlobalStyle from "../styles/GlobalStyle"
 import Sidebar from "./Sidebar"
 import { Helmet } from "react-helmet"
@@ -11,6 +10,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   background: ${props => props.theme.colors.background};
   padding: 2rem;
+  justify-content: center;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -19,9 +19,9 @@ const PageWrapper = styled.div`
 
 const Container = styled.div`
   flex: 1;
-  margin-left: ${props => props.$sidebarOpen ? '250px' : '0'};
-  max-width: 960px;
-  padding: 1rem;
+  margin-left: ${props => props.$sidebarOpen ? '200px' : '0'};
+  max-width: ${props => props.$sidebarOpen ? 'calc(100% - 260px)' : '960px'};
+  padding: 1.5rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,12 +29,12 @@ const Container = styled.div`
   backdrop-filter: blur(8px);
   box-shadow: ${props => props.theme.shadows.large};
   border-radius: 12px;
-  margin: 0 auto;
-  transition: margin-left 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   @media (max-width: 768px) {
     margin-left: 0;
-    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
   }
 `
 
@@ -161,7 +161,6 @@ const Layout = ({ children }) => {
             <a href="https://www.gatsbyjs.com">Gatsby</a> 构建
           </Footer>
         </Container>
-        <ThemeSwitcher />
       </PageWrapper>
     </>
   )
